@@ -1,0 +1,1 @@
+# plugins-better-image-sizes
