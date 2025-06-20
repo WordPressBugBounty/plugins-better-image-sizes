@@ -104,6 +104,9 @@ if( ! class_exists('Better_image_sizes_resizer') ){
 			if( isset( $_POST['bis_nonce'] ) && wp_verify_nonce( $_POST['bis_nonce'], 'delete_all_bis_images' ) ){
 				$this->delete_all_bis_images();
 				echo '<div class="updated"><p>' . esc_html__( 'All cached images have been deleted.', 'bis-images' ) . '</p></div>';
+			}elseif( isset( $_POST['bis_disabled_upscaling_nonce'] ) && wp_verify_nonce( $_POST['bis_disabled_upscaling_nonce'], 'disabled_upscaling' ) ){
+				update_option( 'bis_disabled_upscaling', intval( $_POST['bis_disabled_upscaling'] ) );
+				echo '<div class="updated"><p>' . esc_html__( 'Disable upscaling updated.', 'bis-images' ) . '</p></div>';
 			}elseif( isset( $_POST['bis_disabled_sizes_nonce'] ) && wp_verify_nonce( $_POST['bis_disabled_sizes_nonce'], 'disabled_sizes' ) ){
 				$sizes = $this->get_all_image_sizes();
 				$bis_disabled_sizes = array();
@@ -142,6 +145,20 @@ if( ! class_exists('Better_image_sizes_resizer') ){
 					<?php else: ?>
 						<p style="color:#A00"><?php esc_html_e( 'Not Writeable - please make sure this folder exists and is writeable!', 'bis-images' ) ?></p>
 					<?php endif ?>
+				</div>
+
+				<div class="card">
+					<h3><?php esc_html_e( 'Disable upscaling images', 'bis-images' ) ?></h3>
+					<form method="post" action=""><?php
+						wp_nonce_field( 'disabled_upscaling', 'bis_disabled_upscaling_nonce' );
+						$bis_disabled_upscaling = get_option( 'bis_disabled_upscaling', 1 ); ?>
+						<input type="hidden" name="bis_disabled_upscaling" value="0">
+						<label>
+							<input type="checkbox" name="bis_disabled_upscaling" value="1" <?php checked( $bis_disabled_upscaling, 1 ) ?>>
+							<?php esc_html_e( 'return the full original image if it is smaller than the requested size', 'bis-images' ) ?>
+						</label><br>
+						<br><input class="button button-primary" value="<?php esc_html_e( 'Save', 'bis-images' ) ?>" type="submit">
+					</form>
 				</div>
 
 				<div class="card">
@@ -331,6 +348,14 @@ if( ! class_exists('Better_image_sizes_resizer') ){
 						// maybe replace empty sizes
 						if( ! $dst_w ) $dst_w = $original_sizes['width'];
 						if( ! $dst_h ) $dst_h = $original_sizes['height'];
+
+						// maybe disable upscaling
+						if( intval( get_option( 'bis_disabled_upscaling', 1 ) ) ){
+							if( $dst_w > $original_sizes['width'] || $dst_h > $original_sizes['height'] ){
+								$dst_w = $original_sizes['width'];
+								$dst_h = $original_sizes['height'];
+							}
+						}
 
 						// calculate cropped image size
 						$src_w = $original_sizes['width'];

@@ -3,7 +3,7 @@
 	Plugin Name: Better image sizes
 	Plugin URI: https://wp-speedup.eu
 	Description: Better image sizes
-	Version: 3.6
+	Version: 3.7
 	Author: KubiQ
 	Author URI: https://kubiq.sk
 	Text Domain: better-image-sizes
@@ -15,7 +15,7 @@ defined('ABSPATH') || exit;
 define( 'BIS_BASE', plugin_basename( __FILE__ ) );
 
 if( ! defined('BIS_ALLOWED_MIME_TYPES') ){
-	define( 'BIS_ALLOWED_MIME_TYPES', array( 'image/jpeg', 'image/png', 'image/webp' ) );
+	define( 'BIS_ALLOWED_MIME_TYPES', [ 'image/jpeg', 'image/png', 'image/webp' ] );
 }
 
 if( ! class_exists('Better_image_sizes') ){

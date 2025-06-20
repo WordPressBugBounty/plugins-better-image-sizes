@@ -4,8 +4,8 @@ Donate link: https://www.paypal.me/jakubnovaksl
 Tags: images, media, thumbnails, sizes, retina, responsive, optimize
 Requires at least: 3.0.1
 Requires PHP: 5.6
-Tested up to: 6.5
-Stable tag: 3.6
+Tested up to: 6.8
+Stable tag: 3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -227,6 +227,10 @@ which means that focal point is 50% from left and 80% from top
 
 
 == Changelog ==
+
+= 3.7 =
+* tested on WP 6.8
+* new option "Disable upscaling" that is checked by default - it will return the full original image if it's smaller than requested size
 
 = 3.6 =
 * tested on WP 6.5
