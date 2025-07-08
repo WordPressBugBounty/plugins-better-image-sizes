@@ -5,7 +5,7 @@ Tags: images, media, thumbnails, sizes, retina, responsive, optimize
 Requires at least: 3.0.1
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 3.7
+Stable tag: 3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -123,6 +123,7 @@ Example: `[ 767 => [ 767, 400, 1, 987 ], 9999 => [ 1200, 500, 1 ] ]`
 This will generate `<source media="(max-width:767px)" srcset="image987_767x400.jpg">`
 and `<source media="(max-width:9999px)" srcset="image_1200x500.jpg">`
 and `<source media="(min-width:10000px)" srcset="image.jpg">`
+If you will provide also key `0` then it will replace `<img>`.
 
 * **attr** (array)(optional)
 An array of attributes
@@ -227,6 +228,9 @@ which means that focal point is 50% from left and 80% from top
 
 
 == Changelog ==
+
+= 3.8 =
+* bis_get_attachment_picture function using $sizes argument with key 0 will replace <img> tag in <picture>
 
 = 3.7 =
 * tested on WP 6.8

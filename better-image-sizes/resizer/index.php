@@ -487,7 +487,12 @@ if( ! class_exists('Better_image_sizes_resizer') ){
 				}
 			}
 			$html .= '<source media="(min-width:' . ( $last_breakpoint + 1 ) . 'px)" srcset="' . wp_get_attachment_url( $attachment_id ) . '">';
-			$html .= wp_get_attachment_image( $attachment_id, 'full', false, $attr );
+			if( isset( $sizes[0] ) && count( $sizes[0] ) >= 2 ){
+				$maybe_alternative_attachment_id = isset( $sizes[0][3] ) && $sizes[0][3] ? $sizes[0][3] : $attachment_id;
+				$html .= bis_get_attachment_image( $maybe_alternative_attachment_id, [ $sizes[0][0], $sizes[0][1] ], isset( $sizes[0][2] ) ? $sizes[0][2] : false, $attr );
+			}else{
+				$html .= wp_get_attachment_image( $attachment_id, 'full', false, $attr );
+			}
 			$html .= '</picture>';
 			return apply_filters( 'bis_get_attachment_picture', $html, $attachment_id, $sizes, $attr );
 		}
