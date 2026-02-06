@@ -1,11 +1,11 @@
 === Better image sizes ===
 Contributors: kubiq
 Donate link: https://www.paypal.me/jakubnovaksl
-Tags: images, media, thumbnails, sizes, retina, responsive, optimize
+Tags: media, thumbnails, retina, responsive, optimize
 Requires at least: 3.0.1
 Requires PHP: 5.6
-Tested up to: 6.8
-Stable tag: 3.8
+Tested up to: 6.9
+Stable tag: 3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -228,6 +228,10 @@ which means that focal point is 50% from left and 80% from top
 
 
 == Changelog ==
+
+= 3.9 =
+* tested on WP 6.9
+* new user role capability regenerate_images that allows users to regenerate images
 
 = 3.8 =
 * bis_get_attachment_picture function using $sizes argument with key 0 will replace <img> tag in <picture>
